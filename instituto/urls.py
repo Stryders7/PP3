@@ -1,8 +1,7 @@
-"""
-URL configuration for instituto project.
+"""instituto URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,26 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from alumnos import views
+from django.urls import path, include
 
 urlpatterns = [
-    path('', views.home,name='home'),
     path('admin/', admin.site.urls),
-    path('alfredo/', views.alfredo,name='alfredo'),
-    path('antonia/', views.antonia,name='antonia'),
-    path('artistas/', views.artistas,name='artistas'),
-    path('formulario/', views.formulario,name='formulario'),
-    path('index/', views.index,name='index'),
-    path('jorge/', views.jorge,name='jorge'),
-    path('jose sanhueza/', views.josesanhueza,name='jose sanhueza'),
-    path('marcelo/', views.marcelo,name='marcelo'),
-    path('nosotros/', views.nosotros,name='nosotros'),
-    path('registro/', views.registro,name='registro'),
-    path('santiago/', views.santiago,name='santiago'),
-    
-    path('agregarArticulo/', views.Add_Articulo),
-    path('edicionArticulo/<codigo>', views.Edicion_Articulo),
-    path('editarArticulo/', views.Edit_Articulo),
-    path('eliminarArticulo/<codigo>', views.Del_Articulo)
+    path('',include('alumnos.urls'))
 ]
+
+print("paso por urls de instituto")

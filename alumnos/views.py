@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Tb_Articulo
+#from .models import Tb_Articulo
 from django.contrib import messages
 
 # Create your views here.
@@ -40,7 +40,7 @@ def registro(request):
 def santiago(request):
     return render(request, "santiago.html")
 
-
+'''
 def home(request):
      articuloListados = Tb_Articulo.objects.all()
      messages.success(request, '¡Articulos Listados!')
@@ -75,3 +75,4 @@ def Del_Articulo(request, codigo):
 def Edicion_Articulo(request, codigo):
     articulo = Tb_Articulo.objects.get(codigo=codigo)
     return render(request, "edicionArticulo.html", {"articulo": articulo})
+'''
