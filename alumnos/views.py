@@ -2,10 +2,8 @@ from django.shortcuts import render, redirect
 #from .models import Tb_Articulo
 from django.contrib import messages
 
-# Create your views here.
 
-# def home(request):
-#     return render(request, "home.html")
+# Create your views here.
 
 def alfredo(request):
     return render(request, "alfredo.html")
@@ -20,7 +18,7 @@ def formulario(request):
     return render(request, "formulario.html")
 
 def index(request):
-    return render(request, "index.html")
+    return render(request, "alumnos/index.html")
 
 def jorge(request):
     return render(request, "jorge.html")
