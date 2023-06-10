@@ -1,4 +1,5 @@
 {% extends "./base.html" %}
+{% load static %}
 
 {% block title %} Ground Zero S.A {% endblock %}
 
@@ -14,7 +15,7 @@
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="1000">
             <img
-              src="/img/6508159589406254.jpg"
+              src="{% static 'img/6508159589406254.jpg' %}"
               class="d-block w-100"
               width="400"
               height="400"
@@ -23,7 +24,7 @@
           </div>
           <div class="carousel-item" data-bs-interval="2000">
             <img
-              src="img/fbed8f54d03bd9dc4a4702c53341cf38--chile-small-boats.jpg"
+              src="{% static 'img/fbed8f54d03bd9dc4a4702c53341cf38--chile-small-boats.jpg' %}"
               class="d-block w-100"
               width="400"
               height="400"
@@ -32,7 +33,7 @@
           </div>
           <div class="carousel-item">
             <img
-              src="/img/pintores-chilenos-gonzalez.jpeg"
+              src="{% static 'img/pintores-chilenos-gonzalez.jpeg' %}"
               class="d-block w-100"
               width="400"
               height="400"

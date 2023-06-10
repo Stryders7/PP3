@@ -6,37 +6,37 @@ from django.contrib import messages
 # Create your views here.
 
 def alfredo(request):
-    return render(request, "alfredo.html")
+    return render(request, "alumnos/alfredo.html")
 
 def antonia(request):
-    return render(request, "antonia.html")
+    return render(request, "alumnos/antonia.html")
 
 def artistas(request):
-    return render(request, "artistas.html")
+    return render(request, "alumnos/artistas.html")
 
 def formulario(request):
-    return render(request, "formulario.html")
+    return render(request, "alumnos/formulario.html")
 
 def index(request):
     return render(request, "alumnos/index.html")
 
 def jorge(request):
-    return render(request, "jorge.html")
+    return render(request, "alumnos/jorge.html")
 
 def josesanhueza(request):
-    return render(request, "jose sanhueza.html")
+    return render(request, "alumnos/jose sanhueza.html")
 
 def marcelo(request):
-    return render(request, "marcelo.html")
+    return render(request, "alumnos/marcelo.html")
 
 def nosotros(request):
-    return render(request, "nosotros.html")
+    return render(request, "alumnos/nosotros.html")
 
 def registro(request):
-    return render(request, "registro.html")
+    return render(request, "alumnos/registro.html")
 
 def santiago(request):
-    return render(request, "santiago.html")
+    return render(request, "alumnos/santiago.html")
 
 '''
 def home(request):
