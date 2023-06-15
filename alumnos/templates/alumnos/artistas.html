@@ -8,7 +8,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col">
         <div class="card h-100">
-          <img src="{ % static 'img/alfredo.jpg' %}" class="card-img-top" width="300px" height="300px" alt="">
+          <img src="{% static 'img/alfredo.jpg' %}" class="card-img-top" width="300px" height="300px" alt="">
           <div class="card-body">
             <h5 class="card-title">Alfredo</h5>
             <p class="card-text"> Pintor vanguardista, desafía las normas con su arte
@@ -63,7 +63,7 @@
             <p class="card-text">Pintor introspectivo, plasma en sus obras el alma
               humana, explorando las profundidades de la emoción y la
               belleza.</p>
-            <a href="{% static 'jose sanhueza' %}" class="btn btn-primary">Ver obras</a>
+            <a href="{% url 'jose sanhueza' %}" class="btn btn-primary">Ver obras</a>
           </div>
           <div class="card-footer">
             <small class="text-body-secondary">Obras que encontraras en nuestro centro turistico</small>
