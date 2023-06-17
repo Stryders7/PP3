@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 #from .models import Tb_Articulo
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -37,6 +38,14 @@ def registro(request):
 
 def santiago(request):
     return render(request, "alumnos/santiago.html")
+
+# gestion de usuarios
+def login (request):
+    return render(request, "alumno/login.html")
+
+def salir (request):
+    logout(request)
+    return redirect('/')
 
 '''
 def home(request):
