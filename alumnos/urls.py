@@ -3,6 +3,14 @@ from django.urls import path
 from  . import views
 from django.conf.urls.static import static
 from django.conf import settings
+from .views import artistas_list, artistas_create, artistas_update, artistas_delete
+
+urlpatterns = [
+    path('', artistas_list, name='artistas_list'),
+    path('create/', artistas_create, name='artistas_create'),
+    path('update/<int:pk>/', artistas_update, name='artistas_update'),
+    path('delete/<int:pk>/', artistas_delete, name='artistas_delete'),
+]
 
 
 urlpatterns = [

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-#from .models import Tb_Articulo
+from .models import Artistas
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -46,6 +46,42 @@ def login (request):
 def salir (request):
     logout(request)
     return redirect('/')
+
+def artistas_list(request):
+    artistas = artistas.objects.all()
+    messages.success(request, '¡artistas Listados!')
+    return render(request, 'artistas_list.html', {'artistas': artistas})
+
+
+def artistas_create(request):
+    if request.method == 'POST':
+        nombre_artista = request.POST['nombre_artistas']
+        descripcion = request.POST['descripcion']
+        img = request.POST['img']
+        artistas = artistas(nombre_artista=nombre_artista, descripcion=descripcion, img=img)
+        artistas.save()
+        messages.success(request, '¡Artista Registrado!')
+        return redirect('artistas_list')
+    return render(request, 'artistas_create.html')
+
+
+def artistas_update(request, pk):
+    artistas = artistas.objects.get(pk=pk)
+    if request.method == 'POST':
+        artistas.nombre_artista = request.POST['nombre_artista']
+        artistas.descripcion = request.POST['descripcion']
+        artistas.img = request.POST['img']
+        artistas.save()
+        messages.success(request, '¡Artistas Actualizado!')
+        return redirect('artistas_list')
+    return render(request, 'artistas_update.html', {'artistas': artistas})
+
+
+def artistas_delete(request, pk):
+    artistas = artistas.objects.get(pk=pk)
+    artistas.delete()
+    messages.success(request, '¡Artista Eliminado!')
+    return redirect('artistas_list')
 
 '''
 def home(request):

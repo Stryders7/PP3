@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de artistas</title>
+</head>
+<body>
+    <h1>Lista de artistas</h1>
+    <ul>
+        {% for artistas in artistas %}
+            <li>{{ artistas.nombre_artista }} - {{ artistas.descripcion }} - {{ artistas.img }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'artistas_create' %}">Agregar artista</a>
+</body>
+</html>

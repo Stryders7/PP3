@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar artista</title>
+</head>
+<body>
+    <h1>Agregar artista</h1>
+    <form method="POST" action="{% url 'artistas_create' %}">
+        {% csrf_token %}
+        <label for="nombre_artista">Nombre Artista:</label>
+        <input type="text" name="nombre_artista" required><br>
+        <label for="descripcion">Descripcion:</label>
+        <input type="text" name="descripcion" required><br>
+        <label for="img">Imagen:</label>
+        <input type="image" name="img" required><br>
+        <input type="submit" value="Guardar">
+    </form>
+</body>
+</html>
