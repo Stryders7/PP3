@@ -31,6 +31,13 @@ urlpatterns = [
      path('artistas_create/', artistas_create, name='artistas_create'),
      path('artistas_update/', artistas_update, name='artistas_update'),
      path('artistas_delete/', artistas_delete, name='artistas_delete'),
+     
+
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('register/', views.register_view, name='register'),
+    path('accounts/profile/', views.profile_view, name='profile'),
+
  ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

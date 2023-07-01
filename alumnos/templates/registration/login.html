@@ -1,0 +1,19 @@
+{% extends "alumnos/base.html" %}
+{% load static %}
+
+{% block title %} Iniciar sesión o registrarse {% endblock %}
+
+{% block body %}
+<form method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+  <label for="username">Usuario:</label>
+  <input type="text" name="username" required>
+  
+  <label for="password">Contraseña:</label>
+  <input type="password" name="password" required>
+  
+  <button type="submit">Iniciar sesión</button>
+</form>
+
+<p>¿No tienes una cuenta? <a href="{% url 'register' %}">Registrarse</a></p>
+{% endblock  %}

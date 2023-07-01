@@ -3,6 +3,8 @@ from .models import Artistas
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -88,6 +90,33 @@ def artistas_delete(request):
         messages.success(request, '¡Artista Eliminado!')
         return redirect('artistas_list')
     return render(request, 'alumnos/artistas_delete.html', {'artistas': artistas})
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            # Mostrar mensaje de error de inicio de sesión
+            pass
+    return render(request, 'login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+
+def register_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        User.objects.create_user(username=username, password=password)
+        return redirect('registration/login')
+    return render(request, 'registration/register.html')
 
 '''
 def home(request):

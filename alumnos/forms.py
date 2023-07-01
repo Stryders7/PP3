@@ -8,3 +8,4 @@ class ArtistasForm(forms.ModelForm):
         #fields = ['ID', 'Nombre_artista', 'descripcion', 'img'] 
    
         fields = '__all__' 
+
