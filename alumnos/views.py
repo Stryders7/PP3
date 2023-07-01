@@ -41,16 +41,16 @@ def santiago(request):
 
 # gestion de usuarios
 def login (request):
-    return render(request, "alumno/login.html")
+    return render(request, "alumnos/login.html")
 
 def salir (request):
     logout(request)
     return redirect('/')
 
 def artistas_list(request):
-    artistas = artistas.objects.all()
+    artistas = Artistas.objects.all()
     messages.success(request, '¡artistas Listados!')
-    return render(request, 'artistas_list.html', {'artistas': artistas})
+    return render(request, 'alumnos/artistas_list.html', {'artistas': artistas})
 
 
 def artistas_create(request):
@@ -58,30 +58,35 @@ def artistas_create(request):
         nombre_artista = request.POST['nombre_artistas']
         descripcion = request.POST['descripcion']
         img = request.POST['img']
-        artistas = artistas(nombre_artista=nombre_artista, descripcion=descripcion, img=img)
+        artistas = Artistas(nombre_artista=nombre_artista, descripcion=descripcion, img=img)
         artistas.save()
         messages.success(request, '¡Artista Registrado!')
         return redirect('artistas_list')
-    return render(request, 'artistas_create.html')
+    return render(request, 'alumnos/artistas_create.html')
 
 
-def artistas_update(request, pk):
-    artistas = artistas.objects.get(pk=pk)
+def artistas_update(request):
+    artistas = Artistas.objects.all()
     if request.method == 'POST':
+        artistas = Artistas.objects.get(id=request.POST['artista_id'])
         artistas.nombre_artista = request.POST['nombre_artista']
         artistas.descripcion = request.POST['descripcion']
         artistas.img = request.POST['img']
         artistas.save()
-        messages.success(request, '¡Artistas Actualizado!')
+        messages.success(request, '¡Artista Actualizado!')
         return redirect('artistas_list')
-    return render(request, 'artistas_update.html', {'artistas': artistas})
+    return render(request, 'alumnos/artistas_update.html')
 
 
-def artistas_delete(request, pk):
-    artistas = artistas.objects.get(pk=pk)
-    artistas.delete()
-    messages.success(request, '¡Artista Eliminado!')
-    return redirect('artistas_list')
+def artistas_delete(request):
+    artistas = Artistas.objects.all()
+    if request.method == 'POST':
+        artista_id = request.POST['artista_id']
+        artista = Artistas.objects.get(id=artista_id)
+        artista.delete()
+        messages.success(request, '¡Artista Eliminado!')
+        return redirect('artistas_list')
+    return render(request, 'alumnos/artistas_list.html', {'artistas': artistas})
 
 '''
 def home(request):

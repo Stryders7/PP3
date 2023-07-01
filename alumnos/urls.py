@@ -3,17 +3,18 @@ from django.urls import path
 from  . import views
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import artistas_list, artistas_create, artistas_update, artistas_delete
+from .views import artistas_list , artistas_create, artistas_update, artistas_delete
+
+'''urlpatterns = [
+     path('', artistas_list, name='artistas_list'),
+     path('create/', artistas_create, name='artistas_create'),
+     path('update/<int:pk>/', artistas_update, name='artistas_update'),
+     path('delete/<int:pk>/', artistas_delete, name='artistas_delete'),
+ ]'''
+
 
 urlpatterns = [
-    path('', artistas_list, name='artistas_list'),
-    path('create/', artistas_create, name='artistas_create'),
-    path('update/<int:pk>/', artistas_update, name='artistas_update'),
-    path('delete/<int:pk>/', artistas_delete, name='artistas_delete'),
-]
-
-
-urlpatterns = [
+   
    path('', views.index,name='index'),
    path('nosotros/', views.nosotros, name='nosotros'),
    path('alfredo/', views.alfredo,name='alfredo'),
@@ -25,6 +26,11 @@ urlpatterns = [
    path('marcelo/', views.marcelo,name='marcelo'),
    path('registro/', views.registro,name='registro'),
    path('santiago/', views.santiago,name='santiago'),
+
+   path('artistas_list/', artistas_list, name='artistas_list'),
+     path('artistas_create/', artistas_create, name='artistas_create'),
+     path('artistas_update/', artistas_update, name='artistas_update'),
+     path('artistas_delete/', artistas_delete, name='artistas_delete'),
  ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

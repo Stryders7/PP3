@@ -5,14 +5,14 @@
 </head>
 <body>
     <h1>Actualizar artistas</h1>
-    <form method="POST" action="{% url 'artistas_update' artistas.id %}">
+    <form method="POST" action="{% url 'artistas_update' %}">
         {% csrf_token %}
         <label for="nombre_artista">Nombre Artista:</label>
-        <input type="text" name="nombre_artista" value="{{ artistas.nombre_artista }}" required><br>
+        <input type="text" name="nombre_artista" value="{{ Artistas.nombre_artista }}" required><br>
         <label for="descripcion">Descripcion:</label>
-        <input type="text" name="descripcion" value="{{ artistas.descripcion }}" required><br>
+        <input type="text" name="descripcion" value="{{ Artistas.descripcion }}" required><br>
         <label for="img">Imagen:</label>
-        <input type="image" name="img" value="{{ artistas.img }}" required><br>
+        <input type="image" name="img" value="{{ Artistas.img }}" required><br>
         <input type="submit" value="Actualizar">
     </form>
 </body>
