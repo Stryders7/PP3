@@ -5,15 +5,23 @@
 </head>
 <body>
     <h1>Actualizar artistas</h1>
-    <form method="POST" action="{% url 'artistas_update' %}">
+    <form method="post" action="{% url 'artistas_update'%}" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="nombre_artista">Nombre Artista:</label>
-        <input type="text" name="nombre_artista" value="{{ Artistas.nombre_artista }}" required><br>
-        <label for="descripcion">Descripcion:</label>
-        <input type="text" name="descripcion" value="{{ Artistas.descripcion }}" required><br>
-        <label for="img">Imagen:</label>
-        <input type="image" name="img" value="{{ Artistas.img }}" required><br>
-        <input type="submit" value="Actualizar">
-    </form>
+        <input type="text" name="ID_artista" value="{{ ID_artista }}">
+        
+        <!-- Resto de los campos del formulario -->
+        <label for="nombre_artista">nombre_artista:</label>
+        <input type="text" name="nombre_artista" value= "{{ artista.nombre_artista }}">
+        
+        <label for="descripcion">Descripción:</label>
+        <textarea name="descripcion">{{ artista.descripcion }}</textarea>
+        
+        <label for="img">img:</label>
+        <input type="file" name="img">
+        
+        <!-- Resto de los elementos del formulario -->
+        
+        <button type="submit">Guardar</button>
+      </form>
 </body>
 </html>

@@ -55,10 +55,11 @@ def artistas_list(request):
 
 def artistas_create(request):
     if request.method == 'POST':
-        nombre_artista = request.POST['nombre_artistas']
+        ID_artista = request.POST['ID_artista']
+        nombre_artista = request.POST['nombre_artista']
         descripcion = request.POST['descripcion']
-        img = request.POST['img']
-        artistas = Artistas(nombre_artista=nombre_artista, descripcion=descripcion, img=img)
+        img = request.FILES['img']
+        artistas = Artistas(nombre_artista=nombre_artista, descripcion=descripcion, img=img, ID_artista=ID_artista)
         artistas.save()
         messages.success(request, '¡Artista Registrado!')
         return redirect('artistas_list')
@@ -68,10 +69,10 @@ def artistas_create(request):
 def artistas_update(request):
     artistas = Artistas.objects.all()
     if request.method == 'POST':
-        artistas = Artistas.objects.get(id=request.POST['artista_id'])
+        artistas = Artistas.objects.get(ID_artista=request.POST['ID_artista'])
         artistas.nombre_artista = request.POST['nombre_artista']
         artistas.descripcion = request.POST['descripcion']
-        artistas.img = request.POST['img']
+        artistas.img = request.FILES['img']
         artistas.save()
         messages.success(request, '¡Artista Actualizado!')
         return redirect('artistas_list')
@@ -81,12 +82,12 @@ def artistas_update(request):
 def artistas_delete(request):
     artistas = Artistas.objects.all()
     if request.method == 'POST':
-        artista_id = request.POST['artista_id']
-        artista = Artistas.objects.get(id=artista_id)
+        ID_artista = request.POST['ID_artista']
+        artista = Artistas.objects.get(ID_artista=ID_artista)
         artista.delete()
         messages.success(request, '¡Artista Eliminado!')
         return redirect('artistas_list')
-    return render(request, 'alumnos/artistas_list.html', {'artistas': artistas})
+    return render(request, 'alumnos/artistas_delete.html', {'artistas': artistas})
 
 '''
 def home(request):
