@@ -6,6 +6,21 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def profile_view(request):
+   
+    user = request.user  
+    
+   
+    
+    context = {
+        'user': user,
+        
+    }
+    
+    return render(request, 'profile.html', context)
 # Create your views here.
 
 def alfredo(request):
@@ -115,7 +130,7 @@ def register_view(request):
         username = request.POST['username']
         password = request.POST['password']
         User.objects.create_user(username=username, password=password)
-        return redirect('registration/login')
+        return redirect('login')
     return render(request, 'registration/register.html')
 
 '''
