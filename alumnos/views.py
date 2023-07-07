@@ -113,10 +113,10 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('index')
         else:
-            # Mostrar mensaje de error de inicio de sesión
-            pass
+                messages.ERROR (request, 'Lo sentimos, el nombre de usuario ingresado no existe en nuestra base de datos.')
+                pass
     return render(request, 'login.html')
 
 
