@@ -35,9 +35,27 @@
               
               <a href="{% url 'artistas_list' %}" class="nav-item nav-link">Lista de artistas</a>
             </div>
+          
+
+            
+                
+            {% if user.is_authenticated %}
             <div class="navbar-nav ms-auto">
-              <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
-            </div>
+                <li class="navbar-nav">
+                  <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+                </li>
+              </div>
+            {% else %}
+              <div class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register' %}">Registro</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                </li> 
+              </div>     
+            {% endif %}
+              
           </div>
         </div>
       </nav>

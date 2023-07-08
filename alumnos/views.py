@@ -1,27 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import Artistas
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 
-from django.contrib.auth.decorators import login_required
 
-@login_required
-def profile_view(request):
-   
-    user = request.user  
-    
-   
-    
-    context = {
-        'user': user,
-        
-    }
-    
-    return render(request, 'profile.html', context)
-# Create your views here.
+
 
 def alfredo(request):
     return render(request, "alumnos/alfredo.html")
@@ -57,12 +43,6 @@ def santiago(request):
     return render(request, "alumnos/santiago.html")
 
 # gestion de usuarios
-def login (request):
-    return render(request, "alumnos/login.html")
-
-def salir (request):
-    logout(request)
-    return redirect('/')
 
 def artistas_list(request):
     artistas = Artistas.objects.all()
@@ -106,66 +86,54 @@ def artistas_delete(request):
         return redirect('artistas_list')
     return render(request, 'alumnos/artistas_delete.html', {'artistas': artistas})
 
+
+
+#Funcion para registrar usuario
+def register_view(request):
+    if request.method == 'GET':
+        return render(request, 'registration/register.html', {
+            'form': UserCreationForm
+        })
+    else:
+        if request.POST['password1'] == request.POST['password2']:
+                try:
+                    user = User.objects.create_user(
+                    username=request.POST['username'],
+                    password =request.POST['password1'])
+                    user.save()
+                    login(request, user)
+                    return redirect('index')
+                except IntegrityError:
+                    return render(request, 'registration/register.html', {
+                    'form': UserCreationForm,
+                    "error" : 'Usuario ya existe'
+                })
+            
+        return render(request, 'registration/register.html', {
+                    'form': UserCreationForm,
+                    "error" : 'La contraseña no coincide'
+                })
+
+#Funcion para loguearse
 def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
+    if request.method == 'GET':
+        return render(request, 'registration/login.html',{
+        'form': AuthenticationForm
+    })
+    else:
+        user = authenticate(
+            request, username=request.POST['username'], password=request.POST
+            ['password'])
+        if user is None:
+            return render(request, 'registration/login.html',{
+                'form': AuthenticationForm,
+                'error': 'Username o contraseña incorrecta'
+            })
+        else:
             login(request, user)
             return redirect('index')
-        else:
-                messages.ERROR (request, 'Lo sentimos, el nombre de usuario ingresado no existe en nuestra base de datos.')
-                pass
-    return render(request, 'login.html')
 
-
+#Funcion para cerrar sesion
 def logout_view(request):
     logout(request)
-    return redirect('login')
-
-
-def register_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        User.objects.create_user(username=username, password=password)
-        return redirect('login')
-    return render(request, 'registration/register.html')
-
-'''
-def home(request):
-     articuloListados = Tb_Articulo.objects.all()
-     messages.success(request, '¡Articulos Listados!')
-     return render(request, "gestionArticulos.html", {"articulos": articuloListados})
-
-def Add_Articulo(request):
-    codigo = request.POST['txtCodigo']
-    nombre = request.POST['txtNombre']
-    stock = request.POST['numStock']
-    articulo = Tb_Articulo.objects.create(
-        codigo=codigo, nombre=nombre, stock=stock)
-    messages.success(request, '¡Artículo Registrado!')
-    return redirect('/')
-
-def Edit_Articulo(request):
-    codigo = request.POST['txtCodigo']
-    nombre = request.POST['txtNombre']
-    stock = request.POST['numStock']
-    articulo = Tb_Articulo.objects.get(codigo=codigo)
-    articulo.nombre = nombre
-    articulo.creditos = stock
-    articulo.save()
-    messages.success(request, '¡Artículo Actualizado!')
-    return redirect('/')
-
-def Del_Articulo(request, codigo):
-    articulo = Tb_Articulo.objects.get(codigo=codigo)
-    articulo.delete()
-    messages.success(request, '¡Artículo Eliminado!')
-    return redirect('/')
-
-def Edicion_Articulo(request, codigo):
-    articulo = Tb_Articulo.objects.get(codigo=codigo)
-    return render(request, "edicionArticulo.html", {"articulo": articulo})
-'''
+    return redirect('index')

@@ -33,11 +33,10 @@ urlpatterns = [
      path('artistas_delete/', artistas_delete, name='artistas_delete'),
      
 
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('register/', views.register_view, name='register'),
-    path('accounts/profile/', views.profile_view, name='profile'),
-
+    #Login
+   path('login/', views.login_view, name='login'),
+   path('logout/', views.logout_view, name='logout'),
+   path('register/', views.register_view, name='register'),
  ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
