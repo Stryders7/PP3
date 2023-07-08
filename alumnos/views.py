@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.http import JsonResponse
+from datetime import datetime
 
 
 
@@ -137,3 +139,13 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+
+#Funcion de API
+
+def obtener_hora(request):
+    hora_actual = datetime.now().strftime("%H:%M:%S")
+    data = {
+        'hora': hora_actual,
+    }
+    return JsonResponse(data)

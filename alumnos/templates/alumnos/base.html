@@ -27,7 +27,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav">
-              <a href="{% url 'index' %}"class="nav-item nav-link active">Inicio</a>
+              <a href="{% url 'index' %}"class="nav-item nav-link">Inicio</a>
               <a href="{% url 'nosotros' %}" class="nav-item nav-link"
                 >Quienes somos</a
               >
@@ -35,8 +35,33 @@
               
               <a href="{% url 'artistas_list' %}" class="nav-item nav-link">Lista de artistas</a>
             </div>
-          
 
+
+            <div class="navbar-nav">
+
+            <p id="hora-actual" class="nav-item nav-link">Cargando hora...</p>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function obtenerHora()  {
+        $.ajax({
+            url: '/api/hora/',
+            type: 'GET',
+            success: function(data) {
+                var hora = data.hora;
+                $('#hora-actual').text(hora);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    // Actualizar la hora cada segundo (1000 milisegundos)
+    setInterval(obtenerHora, 1000);
+</script>
+          
+</div>
             
                 
             {% if user.is_authenticated %}

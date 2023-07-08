@@ -26,6 +26,7 @@ urlpatterns = [
    path('marcelo/', views.marcelo,name='marcelo'),
    path('registro/', views.registro,name='registro'),
    path('santiago/', views.santiago,name='santiago'),
+   path('api/hora/', views.obtener_hora, name='obtener_hora'),
 
    path('artistas_list/', artistas_list, name='artistas_list'),
      path('artistas_create/', artistas_create, name='artistas_create'),
